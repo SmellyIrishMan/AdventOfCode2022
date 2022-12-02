@@ -47,8 +47,6 @@ namespace AdventOfCode2022Tests
 			int64_t part2Result = 0;
 
 			std::filesystem::path inputPath{ "Data/Day1Input.txt" };
-			Logger::WriteMessage(inputPath.parent_path().c_str());
-			Logger::WriteMessage(std::filesystem::current_path().c_str());
 
 			std::ifstream fileInput{ inputPath };
 			if (fileInput)
@@ -73,7 +71,6 @@ namespace AdventOfCode2022Tests
 				part1Result = AdventOfCode::Day1HowManyCaloriesPerElf(allElfsLists);
 				part2Result = AdventOfCode::Day1HowManyCaloriesAmongTopThreeElfs(allElfsLists);
 			}
-			
 			
 			Assert::AreEqual(int64_t(69'310), part1Result);
 			Assert::AreEqual(int64_t(206'104), part2Result);

@@ -23,18 +23,16 @@ namespace AdventOfCode
 
 	int64_t Day1HowManyCaloriesAmongTopThreeElfs(ElfCalorieLists calorieLists)
 	{
+		//TODO Could reduce memory bloat/cycles and track 3 largest as we iterate.
 		std::vector<unsigned int> allTotals;
 		for (const ElfCalorieList& list : calorieLists)
 		{
 			allTotals.emplace_back(std::accumulate(list.begin(), list.end(), 0));
 		}
 
-		int64_t topThreeTotal = 0;
 		const unsigned int maxElements = static_cast<unsigned int>(std::min(allTotals.size(), static_cast<size_t>(3)));
-
 		std::partial_sort(allTotals.begin(), allTotals.begin() + maxElements, allTotals.end(), std::greater<unsigned int>());
-		topThreeTotal = std::accumulate(allTotals.begin(), allTotals.begin() + maxElements, 0);
 
-		return topThreeTotal;
+		return std::accumulate(allTotals.begin(), allTotals.begin() + maxElements, 0);;
 	}
 }
