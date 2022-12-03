@@ -18,10 +18,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdventOfCode2022Tests.cpp">
+    <ClCompile Include="Day1Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Day2Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

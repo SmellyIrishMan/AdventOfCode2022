@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../AdventOfCode2022/AdventOfCode2022.cpp"
+#include "../AdventOfCode2022/Day1.cpp"
 #include <filesystem>
 #include <fstream>
 
@@ -8,10 +8,10 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace AdventOfCode2022Tests
 {
-	TEST_CLASS(AdventOfCode2022Tests)
+	TEST_CLASS(Day1Tests)
 	{
 	public:		
-		TEST_METHOD(Day1Tests)
+		TEST_METHOD(Day1Part1SampleTests)
 		{
 			int64_t result = AdventOfCode::Day1HowManyCaloriesPerElf({ {1'000, 2'000, 3'000}, {4'000}, {5'000, 6'000}, {7'000, 8'000, 9'000}, {10'000} });
 			Assert::AreEqual(int64_t(24'000), result);
@@ -26,7 +26,7 @@ namespace AdventOfCode2022Tests
 			Assert::AreEqual(int64_t(15), result);
 		}
 
-		TEST_METHOD(Day1Part2Tests)
+		TEST_METHOD(Day1Part2SampleTests)
 		{
 			int64_t result = AdventOfCode::Day1HowManyCaloriesAmongTopThreeElfs({ {1'000, 2'000, 3'000}, {4'000}, {5'000, 6'000}, {7'000, 8'000, 9'000}, {10'000} });
 			Assert::AreEqual(int64_t(45'000), result);
@@ -74,44 +74,6 @@ namespace AdventOfCode2022Tests
 			
 			Assert::AreEqual(int64_t(69'310), part1Result);
 			Assert::AreEqual(int64_t(206'104), part2Result);
-		}
-
-		TEST_METHOD(Day2Tests)
-		{
-			std::vector<AdventOfCode::RockPaperScissorsTurn> Turns = { {0, 1}, {1, 0}, {2, 2} };
-			unsigned int result = AdventOfCode::Day2RockPaperScissorsStrategyGuide(Turns);
-			Assert::AreEqual(15u, result);
-
-			result = AdventOfCode::Day2RockPaperScissorsStrategyGuideUnlocked(Turns);
-			Assert::AreEqual(12u, result);
-		}
-
-		TEST_METHOD(Day2ActualInputTest)
-		{
-			unsigned int part1Result = 0;
-			unsigned int part2Result = 0;
-
-			std::filesystem::path inputPath{ "Data/Day2Input.txt" };
-
-			std::ifstream fileInput{ inputPath };
-			if (fileInput)
-			{
-				std::vector<AdventOfCode::RockPaperScissorsTurn> turns;
-				std::string line;
-				while (!fileInput.eof())
-				{
-					std::getline(fileInput, line);
-					unsigned int player1Move = line[0] - 'A';
-					unsigned int player2Move = line[2] - 'X';
-					turns.emplace_back(player1Move, player2Move);
-				}
-
-				part1Result = AdventOfCode::Day2RockPaperScissorsStrategyGuide(turns);
-				part2Result = AdventOfCode::Day2RockPaperScissorsStrategyGuideUnlocked(turns);
-			}
-
-			Assert::AreEqual(14'297u, part1Result);
-			Assert::AreEqual(10'498u, part2Result);
 		}
 	};
 }
