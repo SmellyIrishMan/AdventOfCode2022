@@ -34,5 +34,8 @@
     <CopyFileToFolders Include="Data\Day1Input.txt">
       <Filter>Resource Files\Data</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="Data\Day2Input.txt">
+      <Filter>Resource Files\Data</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
