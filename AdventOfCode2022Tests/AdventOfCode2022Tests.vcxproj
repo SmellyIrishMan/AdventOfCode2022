@@ -160,6 +160,7 @@
     <ClCompile Include="Day1Tests.cpp" />
     <ClCompile Include="Day2Tests.cpp" />
     <ClCompile Include="Day3Tests.cpp" />
+    <ClCompile Include="Day4Tests.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -188,6 +189,11 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Data\Day3Input.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Data</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Data\Day4Input.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Data</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
