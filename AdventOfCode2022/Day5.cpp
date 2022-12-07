@@ -55,10 +55,4 @@ namespace AdventOfCode
 
 		return result;
 	}
-
-	//I think I could have a vector of all the elements and just move things around within that right?
-	//And then have a stack index.
-
-	//Otherwise just have a vector of vectors, and remove/append to those.
-	//It's not very fancy but it is effective.
 }
