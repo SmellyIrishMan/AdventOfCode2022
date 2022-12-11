@@ -17,6 +17,12 @@ namespace AdventOfCode
 		};
 		auto GridLocationComparator = [](GridLocation a, GridLocation b) { return (a.row < b.row) || (a.row == b.row && a.col < b.col); };
 
+		struct Direction
+		{
+			int x;
+			int y;
+		};
+
 		using LocationSet = std::set<GridLocation, decltype(GridLocationComparator)>;
 
 		enum class HeightTestResult
@@ -84,7 +90,7 @@ namespace AdventOfCode
 			return visibleIndices;
 		}
 
-		ListOfTreeHeights CreateList(const ListOfTreeHeightLists& grid, GridLocation start, GridLocation direction, size_t num)
+		ListOfTreeHeights CreateList(const ListOfTreeHeightLists& grid, GridLocation start, Direction direction, size_t num)
 		{
 			ListOfTreeHeights treeLine;
 			GridLocation currentLocation = start;
@@ -95,8 +101,8 @@ namespace AdventOfCode
 			while (treeLine.size() < num)
 			{
 				treeLine.push_back(grid[currentLocation.row][currentLocation.col]);
-				currentLocation.row += direction.row;
-				currentLocation.col += direction.col;
+				currentLocation.row += direction.x;
+				currentLocation.col += direction.y;
 			}
 
 			return treeLine;
@@ -134,6 +140,63 @@ namespace AdventOfCode
 			}
 
 			return static_cast<unsigned int>(visibleTreeLocations.size() + outsideElementCount);
+		}
+
+		unsigned int GetScenicScoreForLine(ListOfTreeHeights heights)
+		{
+			if (heights.size() <= 1)
+			{
+				return 0;
+			}
+
+			unsigned int baseHeight = heights[0];
+			unsigned int score = 0;
+			for (size_t i = 1; i < heights.size(); i++)
+			{
+				if (heights[i] >= baseHeight)
+				{
+					score++;
+					return score;
+				}
+				else
+				{
+					score++;
+				}
+			}
+
+			return score;
+		}
+
+		unsigned int BestScenicScore(ListOfTreeHeightLists treeHeightLists)
+		{
+			unsigned int bestScore = 0;
+
+			const size_t gridWidth = treeHeightLists[0].size();
+			const size_t gridHeight = treeHeightLists.size();
+
+			for (size_t row = 0; row < gridHeight - 1; ++row)
+			{
+				for (size_t col = 0; col < gridWidth - 1; ++col)
+				{
+					ListOfTreeHeights North = CreateList(treeHeightLists, {row, col}, { -1, 0}, row + 1);
+					ListOfTreeHeights South = CreateList(treeHeightLists, {row, col}, { 1, 0 }, gridHeight - row);
+					ListOfTreeHeights East = CreateList(treeHeightLists, {row, col}, { 0, 1 }, gridWidth - col);
+					ListOfTreeHeights West = CreateList(treeHeightLists, {row, col}, { 0, -1 }, col + 1);
+
+					unsigned int northScore = GetScenicScoreForLine(North);
+					unsigned int southScore = GetScenicScoreForLine(South);
+					unsigned int eastScore = GetScenicScoreForLine(East);
+					unsigned int westScore = GetScenicScoreForLine(West);
+
+					unsigned int score = northScore * southScore * eastScore * westScore;
+					if (score > bestScore)
+					{
+						bestScore = score;
+					}
+				}
+			}
+
+			return bestScore;
 		}
 	}
 }

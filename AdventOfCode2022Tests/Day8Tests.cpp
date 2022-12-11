@@ -24,7 +24,7 @@ namespace AdventOfCode2022Tests
 				{ 3,5,3,9,0 } };
 
 			Assert::AreEqual(21u, NumberOfVisibleTrees(input));
-			//Assert::AreEqual(95'437u, SumLargeDirectories(root.get()));
+			Assert::AreEqual(8u, BestScenicScore(input));
 		}
 
 		TEST_METHOD(Day8ActualInputTest)
@@ -49,8 +49,8 @@ namespace AdventOfCode2022Tests
 				}
 			}
 
-			unsigned int check = NumberOfVisibleTrees(input);			
-			Assert::AreEqual(1'543u, check);
+			Assert::AreEqual(1'543u, NumberOfVisibleTrees(input));
+			Assert::AreEqual(595'080u, BestScenicScore(input));
 		}
 	};
 }
