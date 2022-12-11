@@ -42,6 +42,9 @@
     <ClCompile Include="Day7Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day8Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -68,6 +71,9 @@
       <Filter>Resource Files\Data</Filter>
     </CopyFileToFolders>
     <CopyFileToFolders Include="Data\Day7Input.txt">
+      <Filter>Resource Files\Data</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Data\Day8Input.txt">
       <Filter>Resource Files\Data</Filter>
     </CopyFileToFolders>
   </ItemGroup>
