@@ -2,6 +2,7 @@
 #include "framework.h"
 #include <vector>
 #include <set>
+#include "Utilities.h"
 
 namespace AdventOfCode
 {
@@ -10,20 +11,7 @@ namespace AdventOfCode
 		using ListOfTreeHeights = std::vector<unsigned int>;
 		using ListOfTreeHeightLists = std::vector<std::vector<unsigned int>>;
 
-		struct GridLocation
-		{
-			size_t row;
-			size_t col;
-		};
-		auto GridLocationComparator = [](GridLocation a, GridLocation b) { return (a.row < b.row) || (a.row == b.row && a.col < b.col); };
-
-		struct Direction
-		{
-			int x;
-			int y;
-		};
-
-		using LocationSet = std::set<GridLocation, decltype(GridLocationComparator)>;
+		using LocationSet = std::set<AdventOfCode::RowColumnLocation, decltype(AdventOfCode::GridLocationComparator)>;
 
 		enum class HeightTestResult
 		{
@@ -90,10 +78,10 @@ namespace AdventOfCode
 			return visibleIndices;
 		}
 
-		ListOfTreeHeights CreateList(const ListOfTreeHeightLists& grid, GridLocation start, Direction direction, size_t num)
+		ListOfTreeHeights CreateList(const ListOfTreeHeightLists& grid, AdventOfCode::RowColumnLocation start, AdventOfCode::Direction2D direction, size_t num)
 		{
 			ListOfTreeHeights treeLine;
-			GridLocation currentLocation = start;
+			AdventOfCode::RowColumnLocation currentLocation = start;
 
 			const size_t gridWidth = grid[0].size();
 			const size_t gridHeight = grid.size();
@@ -120,7 +108,7 @@ namespace AdventOfCode
 			//Rows
 			for (size_t row = 1; row < gridHeight - 1; ++row)
 			{
-				ListOfTreeHeights line = CreateList(treeHeightLists, { row, 1 }, { 0, 1 }, gridWidth - 2 );
+				ListOfTreeHeights line = CreateList(treeHeightLists, { row, 1 }, DirectionEast, gridWidth - 2 );
 				std::vector<size_t> visibleIndexes = ProcessLine(line, treeHeightLists[row][0], treeHeightLists[row][gridWidth - 1]);
 				for (size_t index : visibleIndexes)
 				{
@@ -131,7 +119,7 @@ namespace AdventOfCode
 			//Columns
 			for (size_t column = 1; column < gridWidth - 1; ++column)
 			{
-				ListOfTreeHeights line = CreateList(treeHeightLists, { 1, column }, { 1, 0 }, gridHeight - 2 );
+				ListOfTreeHeights line = CreateList(treeHeightLists, { 1, column }, DirectionSouth, gridHeight - 2 );
 				std::vector<size_t> visibleIndexes = ProcessLine(line, treeHeightLists[0][column], treeHeightLists[gridHeight - 1][column]);
 				for (size_t index : visibleIndexes)
 				{
@@ -178,10 +166,10 @@ namespace AdventOfCode
 			{
 				for (size_t col = 0; col < gridWidth - 1; ++col)
 				{
-					ListOfTreeHeights North = CreateList(treeHeightLists, {row, col}, { -1, 0}, row + 1);
-					ListOfTreeHeights South = CreateList(treeHeightLists, {row, col}, { 1, 0 }, gridHeight - row);
-					ListOfTreeHeights East = CreateList(treeHeightLists, {row, col}, { 0, 1 }, gridWidth - col);
-					ListOfTreeHeights West = CreateList(treeHeightLists, {row, col}, { 0, -1 }, col + 1);
+					ListOfTreeHeights North = CreateList(treeHeightLists, {row, col}, DirectionNorth, row + 1);
+					ListOfTreeHeights South = CreateList(treeHeightLists, {row, col}, DirectionSouth, gridHeight - row);
+					ListOfTreeHeights East = CreateList(treeHeightLists, {row, col}, DirectionEast, gridWidth - col);
+					ListOfTreeHeights West = CreateList(treeHeightLists, {row, col}, DirectionWest, col + 1);
 
 					unsigned int northScore = GetScenicScoreForLine(North);
 					unsigned int southScore = GetScenicScoreForLine(South);
