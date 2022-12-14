@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day10Tests.cpp" />
+    <ClCompile Include="Day11Tests.cpp" />
     <ClCompile Include="Day1Tests.cpp" />
     <ClCompile Include="Day2Tests.cpp" />
     <ClCompile Include="Day3Tests.cpp" />
@@ -238,6 +239,14 @@
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Data\Day10SimpleInput.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Data</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Data\Day11Input.txt">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Data</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Data\Day11SampleInput.txt">
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Data</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
