@@ -48,15 +48,20 @@ namespace AdventOfCode
 							break;
 						}
 
-						if (canReduceWorry)
-						{
-							itemWorry /= 3;
-						}
-						else
-						{
-							//Do some math to account for the possible +/*/^
-							//There are 8 monkeys potentially doing things to the worry level.
-						}
+						//if (canReduceWorry)
+						//{
+						//	itemWorry /= 3;
+						//}
+						//else
+						//{
+						//	//Do some math to account for the possible +/*/^
+						//	//There are 8 monkeys potentially doing things to the worry level.
+
+						//	//What if I % it by the product of all of the dividers?
+						//		//Which is 9,699,690 or 96,577 in the sample
+
+						//	//I get the same answered if I do it or not... so I might be onto something?
+						//}
 
 						std::vector<unsigned64>& trueTarget = monkeyData[data.whereToThrow.first].itemWorryValues;
 						std::vector<unsigned64>& falseTarget = monkeyData[data.whereToThrow.second].itemWorryValues;
@@ -67,6 +72,19 @@ namespace AdventOfCode
 					data.itemWorryValues.clear();
 				}
 			}
+			
+			//So for some reason after 20 rounds in the sample input I've got
+				//98
+				//98
+				//9
+				//102
+			//instead of 
+				//99
+				//97
+				//8
+				//103
+			//So monkey[1] is getting 1 too many.
+			//Same with monkey[2] and the other two are missing one... hmm.
 
 			std::vector<unsigned64> sortedCountedTotals;
 			for (MonkeyData& data : monkeyData)

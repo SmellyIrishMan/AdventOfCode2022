@@ -11,7 +11,7 @@ namespace AdventOfCode
 		using ListOfTreeHeights = std::vector<unsigned int>;
 		using ListOfTreeHeightLists = std::vector<std::vector<unsigned int>>;
 
-		using LocationSet = std::set<AdventOfCode::RowColumnLocation, decltype(AdventOfCode::GridLocationComparator)>;
+		using LocationSet = std::set<AdventOfCode::RowColumnLocation, decltype(AdventOfCode::RowColumnLocationComparator)>;
 
 		enum class HeightTestResult
 		{

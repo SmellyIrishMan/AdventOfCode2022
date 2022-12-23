@@ -3,10 +3,14 @@
 
 namespace AdventOfCode
 {
+	using uInt64 = unsigned long long;
+	using uInt = unsigned int;
+
 	struct Point2D
 	{
 		int x;
 		int y;
+
 		auto operator<=>(const Point2D&) const = default;
 	};
 	const auto Point2DComparator = [](Point2D a, Point2D b) { return (a.x < b.y) || (a.x == b.x && a.y < b.y); };
@@ -15,8 +19,10 @@ namespace AdventOfCode
 	{
 		size_t row;
 		size_t col;
+
+		auto operator<=>(const RowColumnLocation&) const = default;
 	};
-	const auto GridLocationComparator = [](RowColumnLocation a, RowColumnLocation b) { return (a.row < b.row) || (a.row == b.row && a.col < b.col); };
+	const auto RowColumnLocationComparator = [](RowColumnLocation a, RowColumnLocation b) { return (a.row < b.row) || (a.row == b.row && a.col < b.col); };
 
 	struct Direction2D
 	{
@@ -51,6 +57,15 @@ namespace std
 		size_t operator()(AdventOfCode::Point2D const& point) const noexcept
 		{
 			return ((51 + std::hash<int>()(point.x)) * 51 + std::hash<int>()(point.y));
+		}
+	};
+
+	template <>
+	struct hash<AdventOfCode::RowColumnLocation>
+	{
+		size_t operator()(AdventOfCode::RowColumnLocation const& location) const noexcept
+		{
+			return std::hash<size_t>()(location.row) ^ std::hash<size_t>()(location.col);
 		}
 	};
 }
